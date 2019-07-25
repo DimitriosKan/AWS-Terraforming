@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "*  *  *  *"
+echo "Flask Script Starting"
+
+git clone -b Terraform https://github.com/DimitriosKan/Flask-App-Docker.git
+
+cd Flask-App-Docker/02docker-compose && ./run_docker-compose
+
+# fetch pub IP ...
+myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+# and print out directions to page
+echo "#  #  #  #  #  #  #"
+echo Go to: ${myip}:5000
+echo "#  #  #  #  #  #  #"

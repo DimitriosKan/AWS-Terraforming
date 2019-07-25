@@ -6,16 +6,18 @@ resource "aws_instance" "default" {
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
   associate_public_ip_address = true
   key_name = "default-key-pair"
+  
+  connection {
+    type = "ssh"
+    host = "${self.public_ip}"
+    user = "ubuntu"
+    private_key = "${file("~/.ssh/id_rsa")}"
+  }
   provisioner "remote-exec" {
-    connection {
-      type = "ssh"
-      host = "${self.public_ip}"
-      user = "ubuntu"
-      private_key = "${file("~/.ssh/id_rsa")}"
-    }
-    inline = [
-      "echo hi",
-      "hostname"
+    scripts = [
+      "scripts/docker_tf_script",
+      "scripts/docker-compose_tf_script",
+      "scripts/flask_tf_script"
     ]
   }
 }
