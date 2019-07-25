@@ -57,7 +57,7 @@ while true; do
   read -r -p "Initialize terraforming [Yes/No] ? " yn
   case $yn in
     [Yy][Ee][sS]|[yY]* )
-	cd GCP\ group\ setup/
+	cd aws
 	terraform init
 	echo "Terraform initialized";
 	echo "*  *  *  *  *"
